@@ -1,0 +1,88 @@
+# ========================================
+# 1. CMake 与 构建目录 (C++ 重灾区)
+# ========================================
+# 强烈建议你的项目采用 out-of-source build，把所有编译文件扔进 build 文件夹
+build/
+build-*/
+out/
+bin/
+lib/
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.cmake
+compile_commands.json  # CMake 生成的编译数据库，本地用的，不要传
+# 注意：保留你自己写的 CMakeLists.txt 和 cmake 模块
+!CMakeLists.txt
+!cmake/
+
+# ========================================
+# 2. C++ 编译产物 & 调试文件
+# ========================================
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+*.pdb            # Windows Visual Studio 调试符号
+*.ilk
+*.exp
+core             # Linux 崩溃时的 core dump 文件
+vgcore.* # Valgrind 内存检测输出
+
+# ========================================
+# 3. C++ 包管理器 (如果你未来用到的话)
+# ========================================
+vcpkg_installed/
+.vcpkg/
+conan/
+
+# ========================================
+# 4. 视觉项目专属：大数据与模型
+# ========================================
+data/
+datasets/
+output/
+results/
+models/
+weights/
+*.mp4
+*.avi
+*.mkv
+# 如果你用 C++ 做深度学习部署 (比如 TensorRT/OpenVINO)，拦截这些模型
+*.onnx
+*.engine
+*.bin
+*.xml            # 注意：如果你的配置文件也是 xml，请在下面例外规则里放行配置文件
+
+# ========================================
+# 5. C++ 主流 IDE & 代码检查工具
+# ========================================
+.vscode/         # VS Code
+.idea/           # CLion (JetBrains)
+.vs/             # Visual Studio
+*.sln
+*.vcxproj
+*.vcxproj.user
+*.vcxproj.filters
+*.suo
+.cache/          # clangd 等 C++ 语言服务器的缓存
+.clangd/
+
+# ========================================
+# 6. 操作系统自动生成文件
+# ========================================
+.DS_Store
+Thumbs.db
+
+# ========================================
+# 7. 例外规则 (强制放行的有用文件)
+# ========================================
+!data/test.jpg       # 保留一张测试用的图片（比如你代码里写死的 test.jpg）
+!data/.gitkeep       # 保持 data 文件夹的骨架
+!models/.gitkeep     # 保持 models 文件夹的骨架
+!config.xml          # 假如有专门的参数配置文件，记得放行
