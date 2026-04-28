@@ -22,17 +22,15 @@ if(src.empty())
     std::cout<<"could not open the file"<<std::endl;
 }
 
-cv::Mat erosion_dst,dilation_dst;
-
+cv::Mat morph;
 cv::Mat element = cv::getStructuringElement(cv::MORPH_RECT, cv::Size(kernel_size,kernel_size),cv::Point(-1,-1));
 
-
-cv::erode(src, erosion_dst, element);
-cv::dilate(src, dilation_dst, element);
+    cv::morphologyEx(src, morph, 4, element);
 
     cv::imshow("Original Image", src);
-    cv::imshow("Erosion (Thinner)", erosion_dst);
-    cv::imshow("Dilation (Thicker)", dilation_dst);
+
+    cv::imshow("morph image",morph);
+   
 
     cv::waitKey(0);
     return 0;
